@@ -32,7 +32,7 @@ def bubble_sort(array):
         max_unsorted -= 1
 
 
-def plot_bar(array_snapshot, title):
+def plot_bar(array_snapshot, title, step):
     """plot barchart of array"""
 
     source = pd.DataFrame(
@@ -44,7 +44,12 @@ def plot_bar(array_snapshot, title):
         alt.Chart(source)
         .mark_bar()
         .encode(x=alt.X("array_index", sort=sort_by), y="values")
-        .properties(title=title, width=640)
+        .properties(
+            title={
+                "text": title,
+                "subtitle": f"step number: {step}",
+            }
+        )
     )
 
     return chart
@@ -56,8 +61,8 @@ def run_algorithm(n_elements, chart_row, delay):
     array = initialize_array(n_elements, MIN_ARRAY, MAX_ARRAY)
     bubble_sort_generator = bubble_sort(array)
 
-    for array_snapshot in bubble_sort_generator:
-        chart = plot_bar(array_snapshot, "Bubble Sort")
+    for step, array_snapshot in enumerate(bubble_sort_generator):
+        chart = plot_bar(array_snapshot, "Bubble Sort", step)
         chart_row.altair_chart(chart, use_container_width=True)
         sleep(delay)
 
