@@ -5,6 +5,10 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+MIN_ARRAY = 0
+MAX_ARRAY = 100
+FIGSIZE = (20, 10)
+
 
 def initialize_array(n_elements, lower_limit, upper_limit):
     """initialize random array"""
@@ -46,23 +50,26 @@ def plot_bar(array_snapshot, title):
     return chart
 
 
-N_ELEMENTS = st.sidebar.slider(value=20, min_value=0, max_value=100, label="# elements")
-SPEED = st.sidebar.slider(
-    value=5, min_value=2, max_value=100, step=1, label="steps per second"
-)
-DELAY = 1 / SPEED
-MIN = 0
-MAX = 100
-FIGSIZE = (20, 10)
+def run_algorithm(n_elements, chart_row, delay):
+    """run algorithm and chart progress"""
+
+    array = initialize_array(n_elements, MIN_ARRAY, MAX_ARRAY)
+    bubble_sort_generator = bubble_sort(array)
+
+    for array_snapshot in bubble_sort_generator:
+        chart = plot_bar(array_snapshot, "Bubble Sort")
+        chart_row.altair_chart(chart, use_container_width=True)
+        sleep(delay)
 
 
-array = initialize_array(N_ELEMENTS, MIN, MAX)
+def main():
+    chart_row = st.empty()
+    n_elements = st.slider(value=20, min_value=0, max_value=100, label="# elements")
+    speed = st.slider(value=5, min_value=2, max_value=100, step=1, label="speed")
+    delay = 1 / speed
 
-array_gen = bubble_sort(array)
+    run_algorithm(n_elements, chart_row, delay)
 
-chart_row = st.empty()
 
-for array_snapshot in array_gen:
-    chart = plot_bar(array_snapshot, "Bubble Sort")
-    chart_row.altair_chart(chart)
-    sleep(DELAY)
+if __name__ == "__main__":
+    main()
