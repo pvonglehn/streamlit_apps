@@ -5,15 +5,14 @@ This repo contains some interactive charts, mostly for playing around with [stre
 ### You can access the app(s) at:
 [sorting algorithm](https://share.streamlit.io/pvonglehn/streamlit_apps/main/basic_algorithms/app.py)
 
-### Set up development environment
-
-* Set up a virtual environment
+### Run locally
 
 In bash
 ```
 virtualenv venv
 source venv/bin/activate
 pip3 install requirements.txt
+streamlit run bubble_sort/app.py
 ```
 
 * Install [pre-commit](https://pre-commit.com/) git hooks:
