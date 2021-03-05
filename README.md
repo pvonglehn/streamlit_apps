@@ -2,6 +2,8 @@
 
 This repo contains some interactive charts, mostly for playing around with [streamlit](https://streamlit.io/)
 
+### You can access the app(s) at:
+[sorting algorithm](https://share.streamlit.io/pvonglehn/streamlit_apps/main/basic_algorithms/app.py)
 
 ### Set up development environment
 
@@ -18,4 +20,3 @@ pip3 install requirements.txt
 ```
 pre-commit install
 ```
-
