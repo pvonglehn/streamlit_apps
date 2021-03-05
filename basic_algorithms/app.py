@@ -43,13 +43,17 @@ def plot_bar(array_snapshot, title, step):
     chart = (
         alt.Chart(source)
         .mark_bar()
-        .encode(x=alt.X("array_index", sort=sort_by), y="values")
+        .encode(
+            x=alt.X("array_index", sort=sort_by, axis=alt.Axis(tickCount=100)),
+            y="values",
+        )
         .properties(
             title={
                 "text": title,
                 "subtitle": f"step number: {step}",
             }
         )
+        .configure_axisX(labelOverlap=True)
     )
 
     return chart
