@@ -12,13 +12,13 @@ FIGSIZE = (20, 10)
 
 
 def initialize_array(n_elements: int, lower_limit: int, upper_limit: int) -> List:
-    """initialize random array"""
+    """Initialize random array"""
 
     return [randrange(lower_limit, upper_limit) for _ in range(n_elements)]
 
 
 def bubble_sort(array: List) -> Generator:
-    """sort array in ascending order with bubble sort"""
+    """Sort array in ascending order with bubble sort"""
 
     yield (array)
 
@@ -34,7 +34,7 @@ def bubble_sort(array: List) -> Generator:
 
 
 def plot_bar(array_snapshot: List, title: str, step: int) -> alt.Chart:
-    """plot barchart of array"""
+    """Plot barchart of array"""
 
     source = pd.DataFrame(
         {"array_index": range(len(array_snapshot)), "values": array_snapshot}
@@ -61,7 +61,7 @@ def plot_bar(array_snapshot: List, title: str, step: int) -> alt.Chart:
 
 
 def run_algorithm(n_elements: int, chart_row: st.empty, delay: int) -> None:
-    """run algorithm and chart progress"""
+    """Run algorithm and chart progress"""
 
     array = initialize_array(n_elements, MIN_ARRAY, MAX_ARRAY)
     bubble_sort_generator = bubble_sort(array)
