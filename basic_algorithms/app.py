@@ -28,7 +28,7 @@ def bubble_sort(array):
         max_unsorted -= 1
 
 
-def plot_bar(source, title):
+def plot_bar(array_snapshot, title):
     """plot barchart of array"""
 
     source = pd.DataFrame(
@@ -40,17 +40,21 @@ def plot_bar(source, title):
         alt.Chart(source)
         .mark_bar()
         .encode(x=alt.X("array_index", sort=sort_by), y="values")
-        .properties(title=title)
+        .properties(title=title, width=640)
     )
 
     return chart
 
 
-N_ELEMENTS = 20
+N_ELEMENTS = st.sidebar.slider(value=20, min_value=0, max_value=100, label="# elements")
+SPEED = st.sidebar.slider(
+    value=5, min_value=2, max_value=100, step=1, label="steps per second"
+)
+DELAY = 1 / SPEED
 MIN = 0
 MAX = 100
 FIGSIZE = (20, 10)
-DELAY = 0.1
+
 
 array = initialize_array(N_ELEMENTS, MIN, MAX)
 
