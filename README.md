@@ -14,8 +14,3 @@ source venv/bin/activate
 pip3 install requirements.txt
 streamlit run bubble_sort/app.py
 ```
-
-* Install [pre-commit](https://pre-commit.com/) git hooks:
-```
-pre-commit install
-```
