@@ -1,5 +1,6 @@
 from random import randrange
 from time import sleep
+from typing import Generator, List
 
 import altair as alt
 import pandas as pd
@@ -10,13 +11,13 @@ MAX_ARRAY = 100
 FIGSIZE = (20, 10)
 
 
-def initialize_array(n_elements, lower_limit, upper_limit):
+def initialize_array(n_elements: int, lower_limit: int, upper_limit: int) -> List:
     """initialize random array"""
 
     return [randrange(lower_limit, upper_limit) for _ in range(n_elements)]
 
 
-def bubble_sort(array):
+def bubble_sort(array: List) -> Generator:
     """sort array in ascending order with bubble sort"""
 
     yield (array)
@@ -32,7 +33,7 @@ def bubble_sort(array):
         max_unsorted -= 1
 
 
-def plot_bar(array_snapshot, title, step):
+def plot_bar(array_snapshot: List, title: str, step: int) -> alt.Chart:
     """plot barchart of array"""
 
     source = pd.DataFrame(
@@ -59,7 +60,7 @@ def plot_bar(array_snapshot, title, step):
     return chart
 
 
-def run_algorithm(n_elements, chart_row, delay):
+def run_algorithm(n_elements: int, chart_row: st.empty, delay: int) -> None:
     """run algorithm and chart progress"""
 
     array = initialize_array(n_elements, MIN_ARRAY, MAX_ARRAY)
@@ -71,7 +72,7 @@ def run_algorithm(n_elements, chart_row, delay):
         sleep(delay)
 
 
-def main():
+def main() -> None:
     chart_row = st.empty()
     n_elements = st.slider(value=20, min_value=0, max_value=100, label="# elements")
     speed = st.slider(value=5, min_value=2, max_value=100, step=1, label="speed")
